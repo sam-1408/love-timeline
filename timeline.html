@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Our Love Timeline - Step by Step</title>
+<style>
+  body {
+    background: #1a1a2e;
+    color: #ffe4e1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  h1 {
+    color: #ff66c4;
+    margin-bottom: 40px;
+    font-size: 3em;
+    text-align: center;
+  }
+  #timeline-container {
+    background: rgba(255, 102, 196, 0.1);
+    border-radius: 15px;
+    padding: 30px 20px;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 0 20px #ff66c4aa;
+  }
+  .date {
+    font-size: 1.5em;
+    color: #ffb6c1;
+    margin-bottom: 10px;
+  }
+  .message {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .image-container {
+    margin-bottom: 30px;
+  }
+  .image-container img {
+    max-width: 250px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(255, 102, 196, 0.6);
+  }
+  #next-btn {
+    background: #ff66c4;
+    color: white;
+    font-size: 1.2em;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 102, 196, 0.6);
+    transition: background 0.3s ease;
+  }
+  #next-btn:hover:not(:disabled) {
+    background: #ff4ca1;
+  }
+  #next-btn:disabled {
+    background: #ff66c480;
+    cursor: default;
+  }
+  #end-message {
+    display: none;
+    font-size: 1.5em;
+    margin-top: 30px;
+    color: #ffb6c1;
+  }
+</style>
+</head>
+<body>
+
+<h1>Our Love Timeline 💖🐧🐰</h1>
+
+<div id="timeline-container">
+  <div class="date" id="date"></div>
+  <div class="message" id="message"></div>
+  <div class="image-container" id="image-container"></div>
+  <button id="next-btn">Next</button>
+  <div id="end-message">Thank you for reliving these memories with me. I love you forever! 💖🐧🐰</div>
+</div>
+
+<script>
+  const timelineData = [
+    {
+      date: "2nd July",
+      message: "Our first meet in game i wanted to have fun with you since you were sooooooo cute and energetic",
+      img: "https://stickershop.line-scdn.net/stickershop/v1/product/23040239/LINEStorePC/main.png?v=1"
+    },
+    {
+      date: "3rd July",
+      message: "I was waiting for you and at last you finally came after 2 hours i was very happy that time",
+      img: "https://i.pinimg.com/564x/a7/26/2d/a7262dd93991dc40395a932dbee6c415.jpg"
+    },
+    {
+      date: "5th July",
+      message: "When you finally added me on snap at that time i just wanted to talk with you more and more and for whole day",
+      img: "https://i.pinimg.com/736x/41/59/8e/41598e1df1ac47ecfd17276872a0e084.jpg"
+    },
+    {
+      date: "7th July",
+      message: "when i annoyed you too much that you blocked me ToT i was feeling like something is missing from my life but thank god you unblocked me",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvwnWA0g8hef7l6Jg2yer04C_Ec0DjC-qknw&s"
+    },
+    {
+      date: "14th July",
+      message: "When you were really in pain and was unable to sleep i was really concerned about you health i just wanted to take care of you and hug you tightly in my arms",
+      img: "https://i.redd.it/kbawlwvqkiv31.png"
+    },
+    {
+      date: "28th July",
+      message: "when i got and the only thing i was thinking about is you i wanted to hug you tightly that time the way you were anxious i was worried too for you and that time i really fell in love with you",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeyabu5bFXiLpFAoO3-B3AtiLujxcL_PDVaDpXki4RdbkYjFVZ7qH4jvXEfN8N9nCOCmQ&usqp=CAU"
+    },
+    {
+      date: "14th August",
+      message: "i was really excited for your birthday i wanted to make you day soo muchh special",
+      img: "https://i.pinimg.com/736x/7e/4a/2b/7e4a2b807fa29d76ce66b413f0392ff4.jpg"
+    },
+    {
+      date: "21st November",
+      message: "when you finally accepted my proposal i was really happy that time i never ever loved someone this much in my entire life i really love you from the start and will love you till the end",
+      img: "https://i.pinimg.com/564x/ee/3e/c6/ee3ec61baee4eee30b10865beb0da3e7.jpg"
+    }
+  ];
+
+  let currentIndex = 0;
+
+  const dateEl = document.getElementById('date');
+  const messageEl = document.getElementById('message');
+  const imageContainer = document.getElementById('image-container');
+  const nextBtn = document.getElementById('next-btn');
+  const endMessage = document.getElementById('end-message');
+
+  function showTimelineEntry(index) {
+    const entry = timelineData[index];
+    dateEl.textContent = entry.date;
+    messageEl.textContent = entry.message;
+    imageContainer.innerHTML = `<img src="${entry.img}" alt="Image for ${entry.date}" />`;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex++;
+    if (currentIndex < timelineData.length) {
+      showTimelineEntry(currentIndex);
+    } else {
+      // Hide timeline and button, show end message
+      dateEl.style.display = 'none';
+      messageEl.style.display = 'none';
+      imageContainer.style.display = 'none';
+      nextBtn.style.display = 'none';
+      endMessage.style.display = 'block';
+    }
+  });
+
+  // Show the first timeline entry on load
+  showTimelineEntry(currentIndex);
+</script>
+
+</body>
+</html>
